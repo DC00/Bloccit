@@ -16,6 +16,7 @@ posts = Post.all
     body: RandomData.random_paragraph
   )
 end
+Post.censor_every_fifth_posts
 puts "Seed finished"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"

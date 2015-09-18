@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :posts
+  resources :posts, :only => [:index, :show] do
+    get 'export' => 'post#export'
+  end
 
   get 'about' => 'welcome#about'
 

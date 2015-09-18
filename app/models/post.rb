@@ -1,11 +1,17 @@
 class Post < ActiveRecord::Base
   has_many :comments
 
-  def censor_posts
-    @Post.all.each_with_index do |item, index|
-      if index % 5 == 0
-        @Post.at(index).title = "CENSORED"
+  # self. for class method
+  def self.censor_every_fifth_posts
+    Post.find_each do |post|
+      if post.id % 5 == 0
+        post.censor_post
       end
     end
+  end
+
+  def censor_post
+    post.title = "CENSORED"
+    post.save
   end
 end
