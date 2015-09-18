@@ -9,6 +9,16 @@ include RandomData
 end
 posts = Post.all
 
+# idempotence -> adding constant things
+unique_post = Post.create(
+  title: "#####",
+  body: "bodybodybody"
+)
+
+Post.find_or_create_by(title: '#####')
+
+
+
 # Create Comments
 100.times do
   Comment.create!(
