@@ -22,4 +22,9 @@ module RandomData
     letters.shuffle!
     letters[0, rand(3..8)].join
   end
+
+  def random_bool
+    val = rand(0..1)
+    return val == 1
+  end
 end
