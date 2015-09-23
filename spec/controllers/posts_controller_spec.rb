@@ -16,7 +16,6 @@ RSpec.describe PostsController, :type => :controller do
     end
   end
 
-
   describe "GET new" do
     it "returns http success" do
       get :new
@@ -45,7 +44,6 @@ RSpec.describe PostsController, :type => :controller do
     end
   end
 
-
   describe "GET show" do
     it "returns http success" do
       get :show, {id: my_post.id}
@@ -58,7 +56,7 @@ RSpec.describe PostsController, :type => :controller do
     end
 
     it "assigns my_post to @post" do
-      get :show, {id: my_post}
+      get :show, {id: my_post.id}
       expect(assigns(:post)).to eq(my_post)
     end
   end
