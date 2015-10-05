@@ -29,3 +29,6 @@ gem 'jquery-rails'
 gem 'turbolinks'
 
 gem 'bootstrap-sass'
+
+# Shoulda gem for association tests. Used in topic model
+gem 'shoulda-matchers'
