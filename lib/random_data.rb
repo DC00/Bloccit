@@ -22,4 +22,8 @@ module RandomData
     letters.shuffle!
     letters[0, rand(3..8)].join
   end
+
+  def random_number
+    return rand(0..50)
+  end
 end

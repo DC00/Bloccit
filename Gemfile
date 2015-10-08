@@ -15,6 +15,8 @@ end
 group :development, :test do
   gem 'rspec-rails', '>= 3.0'
   gem 'pry-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 # Use SCSS for stylesheets
