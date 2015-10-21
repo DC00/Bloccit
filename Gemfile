@@ -32,3 +32,6 @@ gem 'bootstrap-sass'
 
 # Shoulda gem for association tests. Used in topic model
 gem 'shoulda-matchers'
+
+# Used for encrypting User passwords
+gem 'bcrypt'
