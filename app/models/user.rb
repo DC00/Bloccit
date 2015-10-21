@@ -1,11 +1,14 @@
 class User < ActiveRecord::Base
-  before_save { self.email = email.downcase }
-
   before_save {
+
     self.name.split.each do |i|
       i.capitalize
     end
+
+    self.email = email.downcase
   }
+
+
 
 
 
