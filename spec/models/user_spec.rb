@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe User, :type => :model do
   let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "password") }
    # Shoulda tests for name
+   subject { user }
    it { should validate_presence_of(:name) }
    it { should validate_length_of(:name).is_at_least(1) }
 
@@ -14,9 +15,27 @@ RSpec.describe User, :type => :model do
    it { should_not allow_value("userbloccit.com").for(:email) }
 
    # Shoulda tests for password
-   it { should validate_presence_of(:password) }
+   # it { should validate_presence_of(:password) }
    it { should have_secure_password }
-   it { should validate_length_of(:password).is_at_least(6) }
+   # it { should validate_length_of(:password).is_at_least(6) }
+
+   describe "password check" do
+     it "should validate presence of password" do
+       pswd = "yyyyyy"
+       user.password = pswd
+       expect(user.valid?).to be true
+       user.password = nil
+       expect(user.valid?).to be false
+     end
+
+     it "should have a valid length" do
+       expect(user.valid?).to be true
+       user.password = "a"
+       expect(user.valid?).to be false
+     end
+
+   end
+
 
    describe "attributes" do
      it "should respond to name" do
