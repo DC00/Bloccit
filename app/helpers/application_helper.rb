@@ -6,6 +6,7 @@ module ApplicationHelper
       content_tag :div, capture(&block), class: 'form-group'
     end
   end
+
   
   def avatar_url(user)
     gravatar_id = Digest::MD5::hexdigest(user.email).downcase
