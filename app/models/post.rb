@@ -3,7 +3,6 @@ class Post < ActiveRecord::Base
   belongs_to :user
   has_many :comments, dependent: :destroy
  
-  # These should show up in a push?? 
   default_scope { order('created_at DESC') }
   scope :ordered_by_title, -> { order('title DESC')  }
   scope :ordered_by_reverse_created_at, -> { order('created_at ASC') } 
