@@ -39,6 +39,10 @@ RSpec.describe User, :type => :model do
      it "should respond to member?" do
        expect(user).to respond_to(:member?)
      end
+
+     it "should respond to moderator?" do
+       expect(user).to respond_to(:moderator?)
+     end
    end
 
    describe "invalid user" do
@@ -85,6 +89,24 @@ RSpec.describe User, :type => :model do
  
        it "should return true for #admin?" do
          expect(user.admin?).to be_truthy
+       end
+     end
+
+     context "moderator user" do
+       before do
+         user.moderator!
+       end
+
+       it "should return false for #member?" do
+         expect(user.member?).to be_falsey
+       end
+
+       it "should return false for #admin?" do
+         expect(user.admin?).to be_falsey
+       end
+
+       it "should return true for #moderator?" do
+         expect(user.moderator?).to be_truthy
        end
      end
    end
