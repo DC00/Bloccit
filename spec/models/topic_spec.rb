@@ -21,5 +21,10 @@ it {should have_many(:posts)}
     it "should be public by default" do
       expect(topic.public).to be(true)
     end
+
+	it { is_expected.to have_many(:labelings) }
+	
+	it { is_expected.to have_many(:labels).through(:labelings) }
+
   end
 end
