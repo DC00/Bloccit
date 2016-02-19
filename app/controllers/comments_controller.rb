@@ -3,16 +3,21 @@ class CommentsController < ApplicationController
   before_action :authorize_user, only: [:destroy]
 
   def create
-    @post = Post.find(params[:post_id])
-    comment = @post.comments.new(comment_params)
-    comment.user = current_user
-    
-    if comment.save
+    if params[:topic_id]
+      @topic = Topic.find(params[:topic_id])
+      @comment = @topic.comments.new(comment_params)
+    elsif params[:post_id]
+      @post = Post.find(params[:post_id])
+      @comment = @post.comments.new(comment_params)
+    end
+
+    @comment.user = current_user
+    if @comment.save
       flash[:notice] = "Comment saved successfully."
-      redirect_to [@post.topic, @post]
+      redirect_to owner_path
     else
       flash[:alert] = "Comment failed to save."
-      redirect_to [@post.topic, @post]
+      redirect_to owner_path
     end
   end
   
@@ -41,5 +46,10 @@ class CommentsController < ApplicationController
       flash[:alert] = "You do not have permission to delete a comment."
       redirect_to [comment.post.topic, comment.post]
     end
+  end
+
+  def owner_path
+    return topic_post_path(@post.topic, @post) if @post.present?
+    return topic_path(@topic) if @topic.present?
   end
 end

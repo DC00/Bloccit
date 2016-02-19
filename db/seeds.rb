@@ -39,6 +39,15 @@ posts = Post.all
   )
 end
 
+# Topic Comments
+50.times do
+  Comment.create!(
+    user: users.sample,
+    topic: topics.sample,
+    body: RandomData.random_paragraph
+  )
+end
+
 # Create an admin user
 admin = User.create!(
   name:     'Admin User',
