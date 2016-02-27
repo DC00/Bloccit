@@ -13,6 +13,7 @@ RSpec.describe Post, :type => :model do
   it { should validate_presence_of(:topic) }
   it { should validate_presence_of(:user) }
   it { is_expected.to have_many(:votes) }
+  it { is_expected.to have_many(:favorites) }
   # it { should validate_presence_of(:title).is_at_least(5) }
   # it { should validate_presence_of(:body).is_at_least(20) }
 
