@@ -2,8 +2,8 @@ require 'rails_helper'
 include RandomData
 
 RSpec.describe Topic, :type => :model do
-let(:topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
-it {should have_many(:posts)}
+  let(:topic) { create(:topic) }
+  it {should have_many(:posts)}
 
   describe "attributes" do
     it "should respond to name" do
@@ -22,9 +22,9 @@ it {should have_many(:posts)}
       expect(topic.public).to be(true)
     end
 
-	it { is_expected.to have_many(:labelings) }
-	
-	it { is_expected.to have_many(:labels).through(:labelings) }
+    it { is_expected.to have_many(:labelings) }
+
+    it { is_expected.to have_many(:labels).through(:labelings) }
 
   end
 end
