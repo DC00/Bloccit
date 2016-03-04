@@ -6,7 +6,7 @@ class Comment < ActiveRecord::Base
   validates :user, presence: true
 
   # Want order of comments to be consistent on refresh
-  default_scope { order('updated_at DESC') }
+  default_scope { order('updated_at ASC') }
 
   after_create :send_favorite_emails
 
