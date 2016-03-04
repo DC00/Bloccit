@@ -14,7 +14,7 @@
        <%= @topic.description %>
      </p>
      <% @topic.posts.each do |post| %>
-      <%= render partial: 'votes/voter', locals: { post: post } %>
+      <!-- <%= render partial: 'votes/voter', locals: { post: post } %> -->
       <%= render partial: 'posts/post', locals: { post: post } %>
       <%= render partial: "labels/list", locals: { labels: post.labels } %>
     <% end %>

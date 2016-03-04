@@ -36,3 +36,6 @@ gem 'shoulda-matchers'
 
 # Used for encrypting User passwords
 gem 'bcrypt'
+
+# Needed for the Ajax checkpoint
+gem 'responders', '~> 2.0'
