@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     comment = @post.comments.new(comment_params)
     comment.user = current_user
-    
+
     if comment.save
       flash[:notice] = "Comment saved successfully."
       redirect_to [@post.topic, @post]
@@ -15,18 +15,23 @@ class CommentsController < ApplicationController
       redirect_to [@post.topic, @post]
     end
   end
-  
+
   def destroy
     @post = Post.find(params[:post_id])
-    comment = @post.comments.find(params[:id])
+    @comment = @post.comments.find(params[:id])
 
-    if comment.destroy
+
+    if @comment.destroy
       flash[:notice] = "Comment was deleted."
-      redirect_to [@post.topic, @post]
     else
       flash[:alert] = "Comment couldn't be deleted. Try again."
-      redirect_to [@post.topic, @post]
     end
+  end
+
+  # Adding functionality for Ajax
+  respond_to do |format|
+    format.html
+    format.js
   end
 
   private
