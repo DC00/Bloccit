@@ -1,4 +1,6 @@
 class Api::V1::TopicsController < Api::V1::BaseController
+  # Ensure user is authenticated and authorized to use actions in
+  # Api::V1::TopicsController, except for index and show
   before_action :authenticate_user, except: [:index, :show]
   before_action :authorize_user, except: [:index, :show]
 
