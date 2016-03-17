@@ -96,5 +96,47 @@ RSpec.describe Api::V1::UsersController, type: :controller do
         expect(response.body).to eq(my_user.to_json)
       end
     end
+
+    describe "PUT update" do
+      context "with valid attributes" do
+        before do
+          # See FactoryGirl gem
+          @new_user = build(:user)
+          # Send request to update my_user with new attributes
+          put :update, id: my_user.id, user: { name: @new_user.name, email: @new_user.email, password: @new_user.password, role: "admin" }
+        end
+
+        # Expect successful request and json response
+        it "returns https success" do
+          expect(response).to have_http_status(:success)
+        end
+
+        # Expect successful request and json response
+        it "returns json content type" do
+          expect(response.content_type).to eq 'application/json'
+        end
+
+        # Test updated user, compare attributes with returned json message
+        it "updates a user with the correct attributes" do
+          hashed_json = JSON.parse(response.body)
+          expect(hashed_json["name"]).to eq(@new_user.name)
+          expect(hashed_json["role"]).to eq("admin")
+        end
+      end
+
+      context "with invalid attributes" do
+        before do
+          put :update, id: my_user.id, user: { name: "", email: "bademail@", password: "short" }
+        end
+
+        it "returns http error" do
+          expect(response).to have_http_status(400)
+        end
+
+        it "returns the correct json error message" do
+          expect(response.body).to eq({ "error" => "User update failed", "status" => 400 }.to_json)
+        end
+      end
+    end
   end
 end
